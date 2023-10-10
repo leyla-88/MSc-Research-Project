@@ -101,6 +101,20 @@ data2fix <- lapply(data2fix, function(x) replace(x, is.nan(x), 0))
 
 my_dataframe2 <- do.call(data.frame, data2fix)
 head(my_dataframe2)
-write.csv(my_dataframe2, "wave_data.csv", row.names = FALSE)
+
+wave_data_fixed <- my_dataframe2 %>% 
+  relocate(lat, lon, WavP_0, WavP_22, WavP_45, WavP_67, WavP_90, WavP_112,
+           WavP_135, WavP_157, WavP_180, WavP_202, WavP_225, WavP_247,
+           WavP_270, WavP_292, WavP_315, WavP_337)
+
+head(wave_data_fixed)
+
+names(wave_data_fixed) <- c("lat", "lon", "WavP_0", "WavP_22", "WavP_45", "WavP_67", "WavP_90", "WavP_112",
+                            "WavP_135", "WavP_157", "WavP_180", "WavP_202", "WavP_225", "WavP_247",
+                            "WavP_270", "WavP_292", "WavP_315", "WavP_337", "Wav_PPCT0", "Wav_PPCT22", "Wav_PPCT45", "Wav_PPCT67", "Wav_PPCT90", "Wav_PPCT112",
+                            "Wav_PPCT135", "Wav_PPCT157", "Wav_PPCT180", "Wav_PPCT202", "Wav_PPCT225", "Wav_PPCT247",
+                            "Wav_PPCT270", "Wav_PPCT292", "Wav_PPCT315", "Wav_PPCT337")
+                   
+write.csv(wave_data_fixed, "wave_data.csv", row.names = FALSE)
 
 
